@@ -12,7 +12,7 @@ export default function Home() {
          <input type="text" name="email" id="email"/>
          <input type="text" name="password" id="password"/>
          <input type="submit" value="Submit"/>    
-  j
+  
       </form>
     </div>
   );
