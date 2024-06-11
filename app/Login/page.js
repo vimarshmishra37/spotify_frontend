@@ -1,10 +1,7 @@
-
-'use client'
+'use client';
+import './page.css'
 import React, { useState } from 'react';
-import '../globals.css';
-
-
-export default function Home() {
+const Login = () => {
   const [isSignUpActive, setIsSignUpActive] = useState(false);
 
   const handleSignUpClick = () => {
@@ -14,12 +11,12 @@ export default function Home() {
   const handleSignInClick = () => {
     setIsSignUpActive(false);
   };
-
   return (
+    
     <div className={`container ${isSignUpActive ? 'right-panel-active' : ''}`}>
       <div className={`form-container ${isSignUpActive ? 'sign-up-container' : 'sign-in-container'}`}>
         {isSignUpActive ? (
-         <form action='http://localhost:3000/register' method='POST'>
+         <form action='https://spotify-clone-gxfm.onrender.com/register' method='POST'>
          <h1>Create Account</h1>
          <div className="social-container">
            <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
@@ -65,5 +62,7 @@ export default function Home() {
         </div>
       </div>
     </div>
-  );
+  )
 }
+
+export default Login;

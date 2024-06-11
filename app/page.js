@@ -1,14 +1,17 @@
-import React from 'react'
+'use client';
+import React ,{useState} from 'react';
+import './globals.css';
+import Home_Page from './Home_Page/Home_Page';
 
-const 
-page = () => {
+
+export default function Home() {
+  
   return (
-    <div>
-      <a href='/Login'> Login</a>
-    
-    </div>
-  )
+ <div className='h-full'>
+ 
+ <div className='' ><Home_Page/></div>
+ 
+ </div>
+ 
+  );
 }
-
-export default 
-page
