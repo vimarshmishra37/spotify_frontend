@@ -1,62 +1,116 @@
-'use client';
-import React ,{useState} from 'react';
-import home_Logo from '../assests/home.png';
+import React, { useState,useEffect } from 'react';
+import icons from '../assests/assets'; // Assuming correct path to your icons
+import Image from 'next/image';
+import Link from 'next/link';
 
 const Home_Page = () => {
-  return (
-      
-  <div className=' h-screen bg-black'>
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  <div className=' flex h-5/6'>
-    {/*body*/}
-  
-    {/*left body*/} <div className='h-full flex-none w-1/6 bg-black'>
-     
-  <div className='h-1/3 m-1 rounded-md bg-amber-200'> 
-  
-  <img src={home_Logo} alt='dfg' layout="responsive" />
-  </div>{/*upper */}
-  
-  <div className='h-2/3 m-1 mb-0 rounded-md bg-yellow-700'>er</div>{/**lower */}
-  
-    </div> {/*left body*/}
-   
-     {/*right body */}<div className='relative flex-1 mt-1 rounded-md w-5/6 bg-white scroll-m-0 overflow-auto'>
-  
-    {/*header start */}<div className='sticky top-0 h-1/6  rounded-t-md bg-orange-600' >
-  
-  </div>{/*header end */}
-  The Impact of Technology on Modern Education
-  In the past few decades, the rapid advancement of technology has profoundly impacted various sectors, with education being one of the most significantly transformed. The integration of technology into educational practices has redefined the learning environment, teaching methodologies, and accessibility to educational resources. This essay explores the multifaceted impact of technology on modern education, highlighting its benefits, challenges, and future implications.
-  
-  Enhanced Access to Information
-  One of the most notable impacts of technology on education is the unprecedented access to information. The internet has become a vast repository of knowledge, where students and educators can find information on virtually any topic. Online databases, digital libraries, and educational websites provide a wealth of resources that were previously unavailable or difficult to access. This democratization of information has leveled the playing field, enabling students from diverse backgrounds to access quality educational materials.
-  
-  For instance, platforms like Khan Academy, Coursera, and edX offer free or affordable courses from prestigious institutions, allowing learners worldwide to gain knowledge and skills in various subjects. These platforms have made it possible for students to learn at their own pace, revisit complex concepts, and access supplementary materials to enhance their understanding.
-  
-  Interactive and Engaging Learning
-  Technology has also revolutionized the way education is delivered, making learning more interactive and engaging. Traditional lectures are increasingly being supplemented or replaced by multimedia presentations, interactive simulations, and gamified learning experiences. These technological tools cater to different learning styles, making education more inclusive and effective.
-  
-  Interactive whiteboards, educational apps, and virtual reality (VR) experiences have transformed the classroom environment. For example, VR can take students on virtual field trips to historical sites, deep-sea explorations, or even outer space, providing immersive learning experiences that were previously unimaginable. Such interactive tools not only enhance student engagement but also deepen their understanding of complex concepts by allowing them to visualize and interact with the subject matter.
-  
-  Personalized Learning
-  Another significant impact of technology on education is the ability to personalize learning experiences. Adaptive learning technologies use algorithms and data analytics to tailor educational content to the individual needs and learning pace of each student. This personalization ensures that students receive the right level of challenge and support, maximizing their potential for success.
-  
-  For example, intelligent tutoring systems can provide immediate feedback and customized exercises based on a student’s performance. Learning management systems (LMS) like Moodle and Blackboard allow educators to track student progress, identify areas where they are struggling, and adjust instructional strategies accordingly. This data-driven approach to education helps create a more efficient and effective learning environment.
-  
-  Collaboration and Communication
-  
-      </div>{/*right body */}
-  
-  
-  </div>
-  <div className='h-1/6 bg-red-700 relative   '>
-    {/*footer */}
-  
-  </div>
+  const onScroll = () => {
+    if(window.screenY>0)
+    setIsScrolled(true); // Corrected the comparison here
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll, { passive: true });
+    };
+  }, []);
+
+  return (
+    <div className='h-screen bg-black'>
+      <div className='flex h-5/6'>
+        {/* Left sidebar */}
+        <div className='h-full flex-none w-1/9 bg-black'>
+          {/* Upper section */}
+          <div className='h-1/3 m-1 rounded-md bg-neutral-900 p-5 flex flex-col justify-between'>
+            <Image src={icons.spotify_Logo} alt="Spotify Logo" className='w-24 object-contain' />
+            <div className='flex text-white space-x-3'>
+              <Image src={icons.home_Logo} alt="Home Icon" className='size-5 mr-3' /> Home
+            </div>
+            <div className='flex text-white space-x-3'>
+              <Image src={icons.search_Logo} alt="Search Icon" className='size-5 mr-3' /> Login
+            </div>
+          </div>
+          {/* Lower section */}
+          <div className='h-2/3 m-1 rounded-md bg-neutral-900'>
+            <div className='h-1/2 p-5 flex flex-col justify-between'>
+              <div className='flex text-white space-x-3'>
+                <Image src={icons.library} alt="Library Icon" className='size-5 mr-3' /> Library
+              </div>
+              <div className='flex text-white space-x-3'>
+                <Image src={icons.add_playlist} alt="Add Playlist Icon" className='size-5 mr-3' /> Create Playlist
+              </div>
+              <div className='flex text-white space-x-3'>
+                <Image src={icons.heart} alt="Heart Icon" className='size-5 mr-3' /> Liked Songs
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Right main content */}
+        <div className='relative text-white flex-1 mt-1 rounded-md w-5/6 bg-neutral-900 scroll-m-0 overflow-auto no-scrollbar' style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          {/* Header */}
+          <div className={`sticky top-0 h-1/6 z-10 rounded-t-md flex items-center justify-center transition-colors duration-300  ${isScrolled ? 'bg-black' : 'bg-neutral-900'}`}>
+            {/* Navigation links */}
+            <div className='text-base absolute right-0 flex items-center space-x-7 mr-4 font-semibold text-gray-200/20'>
+              <div className='hover:text-white hover:scale-105 duration-500'>Premium</div>
+              <div className='hover:text-white hover:scale-105 duration-500'>Support</div>
+              <div className='hover:text-white hover:scale-105 duration-500'>Download</div>
+              <div>|</div>
+              <div className='hover:text-white hover:scale-105 duration-500'>SignUp</div>
+              <div className='hover:scale-110 duration-500 bg-white rounded-3xl text-black w-20 h-8 flex items-center justify-center font-bold'>
+                <Link href='/Login'>Login</Link>
+              </div>
+            </div>
+          </div>
+          {/* Main content */}
+          <div className='p-4'>
+            {/* Section titles */}
+            <div className='text-2xl font-semibold'>Focus</div>
+            <div className='w-full flex justify-between'>
+              {[...Array(5)].map((_, index) => (
+                <Card key={index} title="Peaceful Piano" desc="Relax and indulge with beautiful piano pieces and melodies" icon={icons.home_Logo} />
+              ))}
+            </div>
+            <div className='text-2xl font-semibold'>Playlist</div>
+            <div className='w-full flex justify-between'>
+              {[...Array(5)].map((_, index) => (
+                <Card key={index} title="Peaceful Piano" desc="Relax and indulge with beautiful piano pieces and melodies" icon={icons.home_Logo} />
+              ))}
+            </div>
+            <div className='text-2xl font-semibold'>Song Of India</div>
+            <div className='w-full flex justify-between'>
+              {[...Array(5)].map((_, index) => (
+                <Card key={index} title="Peaceful Piano" desc="Relax and indulge with beautiful piano pieces and melodies" icon={icons.home_Logo} />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* Footer section */}
+      <div className='h-1/6 black'>
+        {/* Footer content */}
+      </div>
     </div>
-  
-  )
+  );
+}
+
+// Card component for displaying individual cards
+const Card = ({ title, desc, icon }) => {
+  return (
+    <div className='group rounded-md text-xs card hover:bg-black bg-opacity-30 w-1/6 p-4'>
+      <div className='relative'>
+        {/* Image for the card */}
+        <img className='rounded-md w-full h-36 object-contain' src='https://plus.unsplash.com/premium_photo-1687890821482-886629c12df4?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8' alt='dfg' />
+        <Image src={icons.play_button} alt="Play button" className='w-10 absolute bottom-0 right-2 transform scale-0 translate-y-0 group-hover:scale-125 group-hover:-translate-y-2 opacity-0 group-hover:opacity-100 transition duration-300' />
+      </div>
+      {/* Card title and description */}
+      <div className='text-white m-1 text-left'>{title}</div>
+      <div className='text-gray-500 m-1'>{desc}</div>
+    </div>
+  );
 }
 
 export default Home_Page;
